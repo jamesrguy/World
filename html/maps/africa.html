@@ -1,0 +1,205 @@
+<!-- Africa Interactive Map -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" style="max-width: 100%; height: auto;">
+<style>
+    .country-region {
+        fill: #FFF;
+        stroke: #333;
+        stroke-width: 2;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .country-region:hover {
+        stroke-width: 4;
+        filter: brightness(0.9);
+    }
+    .country-region[level="5"] { fill: #FF7E7E; }
+    .country-region[level="4"] { fill: #FFB57E; }
+    .country-region[level="3"] { fill: #FFE57E; }
+    .country-region[level="2"] { fill: #A8FFBE; }
+    .country-region[level="1"] { fill: #88AEFF; }
+    .country-region[level="0"][alt="true"] { fill: #d6beff; }
+    .country-label {
+        font-size: 11px;
+        fill: #333;
+        pointer-events: none;
+        text-anchor: middle;
+        font-weight: 500;
+    }
+</style>
+
+<!-- Background -->
+<rect width="1000" height="1200" fill="#E0F0FF"/>
+
+<!-- Countries (simplified grid layout for Africa's 54 countries) -->
+<g id="countries">
+    <!-- North Africa -->
+    <rect class="country-region" data-country="Morocco" x="50" y="100" width="100" height="70" rx="4"/>
+    <text x="100" y="140" class="country-label">Morocco</text>
+
+    <rect class="country-region" data-country="Algeria" x="160" y="100" width="140" height="130" rx="4"/>
+    <text x="230" y="170" class="country-label" font-size="13">Algeria</text>
+
+    <rect class="country-region" data-country="Tunisia" x="310" y="100" width="75" height="70" rx="4"/>
+    <text x="347" y="140" class="country-label">Tunisia</text>
+
+    <rect class="country-region" data-country="Libya" x="395" y="100" width="150" height="100" rx="4"/>
+    <text x="470" y="155" class="country-label" font-size="13">Libya</text>
+
+    <rect class="country-region" data-country="Egypt" x="555" y="100" width="120" height="120" rx="4"/>
+    <text x="615" y="165" class="country-label" font-size="13">Egypt</text>
+
+    <rect class="country-region" data-country="Western Sahara" x="50" y="180" width="100" height="65" rx="4"/>
+    <text x="100" y="217" class="country-label" font-size="10">W. Sahara</text>
+
+    <rect class="country-region" data-country="Mauritania" x="50" y="255" width="110" height="90" rx="4"/>
+    <text x="105" y="305" class="country-label">Mauritania</text>
+
+    <rect class="country-region" data-country="Mali" x="170" y="240" width="140" height="105" rx="4"/>
+    <text x="240" y="297" class="country-label" font-size="13">Mali</text>
+
+    <rect class="country-region" data-country="Niger" x="320" y="240" width="140" height="105" rx="4"/>
+    <text x="390" y="297" class="country-label" font-size="13">Niger</text>
+
+    <rect class="country-region" data-country="Chad" x="470" y="210" width="115" height="135" rx="4"/>
+    <text x="527" y="282" class="country-label" font-size="12">Chad</text>
+
+    <rect class="country-region" data-country="Sudan" x="595" y="230" width="140" height="120" rx="4"/>
+    <text x="665" y="295" class="country-label" font-size="13">Sudan</text>
+
+    <!-- West Africa -->
+    <rect class="country-region" data-country="Senegal" x="50" y="355" width="75" height="60" rx="4"/>
+    <text x="87" y="390" class="country-label" font-size="10">Senegal</text>
+
+    <rect class="country-region" data-country="Gambia" x="50" y="425" width="50" height="35" rx="4"/>
+    <text x="75" y="447" class="country-label" font-size="9">Gambia</text>
+
+    <rect class="country-region" data-country="Guinea-Bissau" x="110" y="425" width="70" height="35" rx="4"/>
+    <text x="145" y="447" class="country-label" font-size="9">G-Bissau</text>
+
+    <rect class="country-region" data-country="Guinea" x="135" y="355" width="75" height="105" rx="4"/>
+    <text x="172" y="412" class="country-label" font-size="10">Guinea</text>
+
+    <rect class="country-region" data-country="Sierra Leone" x="220" y="400" width="70" height="60" rx="4"/>
+    <text x="255" y="435" class="country-label" font-size="9">S. Leone</text>
+
+    <rect class="country-region" data-country="Liberia" x="220" y="470" width="70" height="60" rx="4"/>
+    <text x="255" y="505" class="country-label" font-size="10">Liberia</text>
+
+    <rect class="country-region" data-country="Ivory Coast" x="300" y="400" width="85" height="130" rx="4"/>
+    <text x="342" y="470" class="country-label" font-size="10">Ivory Coast</text>
+
+    <rect class="country-region" data-country="Burkina Faso" x="240" y="355" width="95" height="75" rx="4"/>
+    <text x="287" y="397" class="country-label" font-size="10">Burkina</text>
+
+    <rect class="country-region" data-country="Ghana" x="395" y="420" width="75" height="110" rx="4"/>
+    <text x="432" y="480" class="country-label" font-size="10">Ghana</text>
+
+    <rect class="country-region" data-country="Togo" x="480" y="450" width="45" height="80" rx="4"/>
+    <text x="502" y="495" class="country-label" font-size="9">Togo</text>
+
+    <rect class="country-region" data-country="Benin" x="535" y="450" width="50" height="95" rx="4"/>
+    <text x="560" y="502" class="country-label" font-size="9">Benin</text>
+
+    <rect class="country-region" data-country="Nigeria" x="470" y="355" width="170" height="150" rx="4"/>
+    <text x="555" y="435" class="country-label" font-size="14">Nigeria</text>
+
+    <rect class="country-region" data-country="Cameroon" x="595" y="400" width="90" height="125" rx="4"/>
+    <text x="640" y="467" class="country-label" font-size="11">Cameroon</text>
+
+    <!-- Central Africa -->
+    <rect class="country-region" data-country="Central African Republic" x="650" y="355" width="150" height="90" rx="4"/>
+    <text x="725" y="405" class="country-label" font-size="10">CAR</text>
+
+    <rect class="country-region" data-country="South Sudan" x="745" y="360" width="130" height="100" rx="4"/>
+    <text x="810" y="415" class="country-label" font-size="11">S. Sudan</text>
+
+    <rect class="country-region" data-country="Equatorial Guinea" x="595" y="535" width="85" height="50" rx="4"/>
+    <text x="637" y="565" class="country-label" font-size="9">Eq. Guinea</text>
+
+    <rect class="country-region" data-country="Gabon" x="595" y="595" width="85" height="90" rx="4"/>
+    <text x="637" y="645" class="country-label" font-size="10">Gabon</text>
+
+    <rect class="country-region" data-country="Republic of the Congo" x="690" y="535" width="110" height="150" rx="4"/>
+    <text x="745" y="615" class="country-label" font-size="10">Congo</text>
+
+    <rect class="country-region" data-country="DRC" x="690" y="455" width="185" height="225" rx="4"/>
+    <text x="782" y="572" class="country-label" font-size="14">DR Congo</text>
+
+    <!-- East Africa -->
+    <rect class="country-region" data-country="Ethiopia" x="735" y="470" width="140" height="130" rx="4"/>
+    <text x="805" y="540" class="country-label" font-size="12">Ethiopia</text>
+
+    <rect class="country-region" data-country="Eritrea" x="785" y="380" width="90" height="80" rx="4"/>
+    <text x="830" y="425" class="country-label" font-size="10">Eritrea</text>
+
+    <rect class="country-region" data-country="Djibouti" x="845" y="465" width="60" height="45" rx="4"/>
+    <text x="875" y="492" class="country-label" font-size="9">Djibouti</text>
+
+    <rect class="country-region" data-country="Somalia" x="845" y="520" width="105" height="160" rx="4"/>
+    <text x="897" y="605" class="country-label" font-size="11">Somalia</text>
+
+    <rect class="country-region" data-country="Kenya" x="785" y="610" width="115" height="130" rx="4"/>
+    <text x="842" y="680" class="country-label" font-size="12">Kenya</text>
+
+    <rect class="country-region" data-country="Uganda" x="735" y="610" width="95" height="105" rx="4"/>
+    <text x="782" y="667" class="country-label" font-size="11">Uganda</text>
+
+    <rect class="country-region" data-country="Rwanda" x="715" y="690" width="60" height="50" rx="4"/>
+    <text x="745" y="720" class="country-label" font-size="9">Rwanda</text>
+
+    <rect class="country-region" data-country="Burundi" x="715" y="750" width="60" height="55" rx="4"/>
+    <text x="745" y="782" class="country-label" font-size="9">Burundi</text>
+
+    <rect class="country-region" data-country="Tanzania" x="735" y="750" width="165" height="155" rx="4"/>
+    <text x="817" y="832" class="country-label" font-size="13">Tanzania</text>
+
+    <!-- Southern Africa -->
+    <rect class="country-region" data-country="Angola" x="595" y="695" width="130" height="210" rx="4"/>
+    <text x="660" y="805" class="country-label" font-size="12">Angola</text>
+
+    <rect class="country-region" data-country="Zambia" x="650" y="915" width="145" height="110" rx="4"/>
+    <text x="722" y="975" class="country-label" font-size="12">Zambia</text>
+
+    <rect class="country-region" data-country="Malawi" x="805" y="915" width="75" height="140" rx="4"/>
+    <text x="842" y="990" class="country-label" font-size="10">Malawi</text>
+
+    <rect class="country-region" data-country="Mozambique" x="750" y="975" width="150" height="185" rx="4"/>
+    <text x="825" y="1072" class="country-label" font-size="12">Mozambique</text>
+
+    <rect class="country-region" data-country="Zimbabwe" x="650" y="1035" width="120" height="105" rx="4"/>
+    <text x="710" y="1092" class="country-label" font-size="11">Zimbabwe</text>
+
+    <rect class="country-region" data-country="Namibia" x="480" y="980" width="135" height="160" rx="4"/>
+    <text x="547" y="1065" class="country-label" font-size="12">Namibia</text>
+
+    <rect class="country-region" data-country="Botswana" x="520" y="1050" width="115" height="110" rx="4"/>
+    <text x="577" y="1110" class="country-label" font-size="11">Botswana</text>
+
+    <rect class="country-region" data-country="South Africa" x="430" y="1070" width="270" height="110" rx="4"/>
+    <text x="565" y="1130" class="country-label" font-size="14">South Africa</text>
+
+    <rect class="country-region" data-country="Lesotho" x="590" y="1130" width="65" height="40" rx="4"/>
+    <text x="622" y="1155" class="country-label" font-size="9">Lesotho</text>
+
+    <rect class="country-region" data-country="Eswatini" x="660" y="1120" width="75" height="45" rx="4"/>
+    <text x="697" y="1147" class="country-label" font-size="9">Eswatini</text>
+
+    <!-- Island nations -->
+    <rect class="country-region" data-country="Madagascar" x="820" y="1050" width="80" height="130" rx="4"/>
+    <text x="860" y="1120" class="country-label" font-size="11">Madagascar</text>
+
+    <rect class="country-region" data-country="Mauritius" x="885" y="1140" width="65" height="30" rx="4"/>
+    <text x="917" y="1160" class="country-label" font-size="9">Mauritius</text>
+
+    <rect class="country-region" data-country="Seychelles" x="820" y="925" width="75" height="30" rx="4"/>
+    <text x="857" y="945" class="country-label" font-size="9">Seychelles</text>
+
+    <rect class="country-region" data-country="Cape Verde" x="50" y="310" width="80" height="35" rx="4"/>
+    <text x="90" y="332" class="country-label" font-size="9">Cape Verde</text>
+
+    <rect class="country-region" data-country="Sao Tome and Principe" x="490" y="550" width="90" height="30" rx="4"/>
+    <text x="535" y="570" class="country-label" font-size="8">Sao Tome</text>
+</g>
+
+<text x="500" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#333">Africa</text>
+</svg>

@@ -138,6 +138,50 @@ const app = createApp({
 
         viewWorldMap() {
             this.currentView = 'world';
+            this.$nextTick(() => {
+                this.loadWorldMap();
+            });
+        },
+
+        async loadWorldMap() {
+            try {
+                const response = await fetch('maps/world-summary.svg');
+                const svgText = await response.text();
+                const container = document.getElementById('world-map-container');
+                container.innerHTML = svgText;
+
+                // Color continents based on progress
+                this.updateWorldMapColors();
+
+                // Make continents clickable
+                document.querySelectorAll('[data-continent]').forEach(element => {
+                    element.addEventListener('click', (e) => {
+                        const continentId = e.target.dataset.continent;
+                        this.selectContinent(continentId);
+                    });
+                });
+            } catch (error) {
+                console.error('Error loading world map:', error);
+                document.getElementById('world-map-container').innerHTML = `
+                    <p style="text-align: center; color: #999;">
+                        World map visualization loading...
+                    </p>
+                `;
+            }
+        },
+
+        updateWorldMapColors() {
+            // Update continent colors based on user progress
+            for (const continent of this.continents) {
+                const element = document.querySelector(`[data-continent="${continent.id}"]`);
+                if (element) {
+                    if (continent.completed) {
+                        element.setAttribute('data-completed', 'true');
+                    } else if (continent.countriesMarked > 0) {
+                        element.setAttribute('data-visited', 'true');
+                    }
+                }
+            }
         },
 
         backToSelector() {
@@ -145,50 +189,161 @@ const app = createApp({
             this.selectedContinent = null;
         },
 
-        loadContinentView(continentId) {
+        async loadContinentView(continentId) {
             const continent = CONTINENTS[continentId];
             const contentDiv = document.getElementById('continent-content');
 
-            // For now, show a placeholder
-            // In a full implementation, this would load actual SVG maps
-            contentDiv.innerHTML = `
-                <h2>${continent.icon} ${continent.name}</h2>
-                <p>Countries: ${continent.totalCountries}</p>
-                <p style="color: #999; font-style: italic;">
-                    Note: Individual continent maps are being developed.
-                    The Europe map (eu.html) can be used as a reference for now.
-                </p>
-                <div style="text-align: left; max-width: 600px; margin: 20px auto; background: #f5f5f5; padding: 20px; border-radius: 8px;">
-                    <h3>Countries in ${continent.name}:</h3>
-                    <div style="columns: 2; column-gap: 20px;">
-                        ${continent.countries.map(country => `
-                            <div style="margin: 5px 0;">
-                                <label style="display: flex; align-items: center; cursor: pointer;">
-                                    <input type="checkbox" data-country="${country}"
-                                           ${this.mapData[country] ? 'checked' : ''}
-                                           style="margin-right: 8px;">
-                                    ${country}
-                                </label>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
-                        <i>Note: This is a temporary checkbox interface. Full interactive SVG maps coming soon!</i>
-                    </p>
-                </div>
-            `;
+            try {
+                // Load continent map HTML
+                const response = await fetch(`maps/${continentId}.html`);
+                const mapHTML = await response.text();
+                contentDiv.innerHTML = mapHTML;
 
-            // Add event listeners to checkboxes
-            contentDiv.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', (e) => {
+                // Color countries based on user progress
+                this.updateContinentMapColors();
+
+                // Make countries clickable
+                this.setupCountryClickHandlers();
+
+            } catch (error) {
+                console.error('Error loading continent map:', error);
+                // Fallback to checkbox interface
+                contentDiv.innerHTML = `
+                    <h2>${continent.icon} ${continent.name}</h2>
+                    <p>Countries: ${continent.totalCountries}</p>
+                    <div style="text-align: left; max-width: 600px; margin: 20px auto; background: #f5f5f5; padding: 20px; border-radius: 8px;">
+                        <h3>Countries in ${continent.name}:</h3>
+                        <div style="columns: 2; column-gap: 20px;">
+                            ${continent.countries.map(country => `
+                                <div style="margin: 5px 0;">
+                                    <label style="display: flex; align-items: center; cursor: pointer;">
+                                        <input type="checkbox" data-country="${country}"
+                                               ${this.mapData[country] ? 'checked' : ''}
+                                               style="margin-right: 8px;">
+                                        ${country}
+                                    </label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                // Add event listeners to checkboxes
+                contentDiv.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.addEventListener('change', (e) => {
+                        const country = e.target.dataset.country;
+                        if (e.target.checked) {
+                            this.setCountryLevel(country, 3);
+                        } else {
+                            this.setCountryLevel(country, 0);
+                        }
+                    });
+                });
+            }
+        },
+
+        updateContinentMapColors() {
+            // Color countries based on current map data
+            document.querySelectorAll('.country-region').forEach(element => {
+                const country = element.dataset.country;
+                if (country && this.mapData[country]) {
+                    element.setAttribute('level', this.mapData[country]);
+                } else {
+                    element.setAttribute('level', '0');
+                }
+            });
+        },
+
+        setupCountryClickHandlers() {
+            document.querySelectorAll('.country-region').forEach(element => {
+                element.addEventListener('click', (e) => {
                     const country = e.target.dataset.country;
-                    if (e.target.checked) {
-                        this.setCountryLevel(country, 3); // Default to "Visited"
-                    } else {
-                        this.setCountryLevel(country, 0);
+                    if (country) {
+                        this.showLevelSelector(country, e);
                     }
                 });
             });
+        },
+
+        showLevelSelector(country, event) {
+            // Remove any existing selector
+            const existing = document.getElementById('level-selector');
+            if (existing) existing.remove();
+
+            // Create level selector popup
+            const selector = document.createElement('div');
+            selector.id = 'level-selector';
+            selector.style.cssText = `
+                position: fixed;
+                background: white;
+                border: 3px solid #333;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                z-index: 10000;
+                min-width: 200px;
+            `;
+
+            const currentLevel = this.mapData[country] || 0;
+
+            selector.innerHTML = `
+                <h3 style="margin: 0 0 10px 0; font-size: 16px;">${country}</h3>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <button class="level-btn" data-level="5" style="background: #FF7E7E; padding: 10px; border: 2px solid #333; border-radius: 5px; cursor: pointer; font-weight: ${currentLevel === 5 ? 'bold' : 'normal'};">
+                        5 - Lived Here
+                    </button>
+                    <button class="level-btn" data-level="4" style="background: #FFB57E; padding: 10px; border: 2px solid #333; border-radius: 5px; cursor: pointer; font-weight: ${currentLevel === 4 ? 'bold' : 'normal'};">
+                        4 - Stayed Here
+                    </button>
+                    <button class="level-btn" data-level="3" style="background: #FFE57E; padding: 10px; border: 2px solid #333; border-radius: 5px; cursor: pointer; font-weight: ${currentLevel === 3 ? 'bold' : 'normal'};">
+                        3 - Visited Here
+                    </button>
+                    <button class="level-btn" data-level="2" style="background: #A8FFBE; padding: 10px; border: 2px solid #333; border-radius: 5px; cursor: pointer; font-weight: ${currentLevel === 2 ? 'bold' : 'normal'};">
+                        2 - Stopped Here
+                    </button>
+                    <button class="level-btn" data-level="1" style="background: #88AEFF; padding: 10px; border: 2px solid #333; border-radius: 5px; cursor: pointer; font-weight: ${currentLevel === 1 ? 'bold' : 'normal'};">
+                        1 - Passed Here
+                    </button>
+                    <button class="level-btn" data-level="0" style="background: #d6beff; padding: 10px; border: 2px solid #333; border-radius: 5px; cursor: pointer; font-weight: ${currentLevel === 0 ? 'bold' : 'normal'};">
+                        0 - Want to be Here
+                    </button>
+                    <button class="level-btn" data-level="-1" style="background: #FFF; padding: 10px; border: 2px solid #333; border-radius: 5px; cursor: pointer;">
+                        Clear
+                    </button>
+                </div>
+            `;
+
+            // Position near click
+            const x = Math.min(event.clientX, window.innerWidth - 250);
+            const y = Math.min(event.clientY, window.innerHeight - 400);
+            selector.style.left = x + 'px';
+            selector.style.top = y + 'px';
+
+            document.body.appendChild(selector);
+
+            // Add click handlers for level buttons
+            selector.querySelectorAll('.level-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const level = parseInt(btn.dataset.level);
+                    if (level === -1) {
+                        this.setCountryLevel(country, 0);
+                    } else {
+                        this.setCountryLevel(country, level);
+                    }
+                    this.updateContinentMapColors();
+                    selector.remove();
+                });
+            });
+
+            // Close on outside click
+            setTimeout(() => {
+                document.addEventListener('click', function closeSelector(e) {
+                    if (!selector.contains(e.target) && e.target.className !== 'country-region') {
+                        selector.remove();
+                        document.removeEventListener('click', closeSelector);
+                    }
+                }, { once: true });
+            }, 100);
         },
 
         setCountryLevel(countryId, level) {

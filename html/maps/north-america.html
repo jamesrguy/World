@@ -1,0 +1,114 @@
+<!-- North America Interactive Map -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" style="max-width: 100%; height: auto;">
+<style>
+    .country-region {
+        fill: #FFF;
+        stroke: #333;
+        stroke-width: 2;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .country-region:hover {
+        stroke-width: 4;
+        filter: brightness(0.9);
+    }
+    .country-region[level="5"] { fill: #FF7E7E; }
+    .country-region[level="4"] { fill: #FFB57E; }
+    .country-region[level="3"] { fill: #FFE57E; }
+    .country-region[level="2"] { fill: #A8FFBE; }
+    .country-region[level="1"] { fill: #88AEFF; }
+    .country-region[level="0"][alt="true"] { fill: #d6beff; }
+    .country-label {
+        font-size: 12px;
+        fill: #333;
+        pointer-events: none;
+        text-anchor: middle;
+        font-weight: 500;
+    }
+</style>
+
+<!-- Background -->
+<rect width="1200" height="1000" fill="#E0F0FF"/>
+
+<!-- Countries -->
+<g id="countries">
+    <!-- Canada (large, top) -->
+    <path class="country-region" data-country="Canada"
+          d="M 100,80 L 1000,80 L 1050,100 L 1080,150 L 1100,200 L 1100,350 L 1050,380 L 950,400 L 850,410 L 750,410 L 650,405 L 550,395 L 450,390 L 350,385 L 250,380 L 150,360 L 100,320 L 80,250 L 85,180 L 95,120 Z"/>
+    <text x="600" y="250" class="country-label" font-size="24">Canada</text>
+
+    <!-- USA (large, center) -->
+    <path class="country-region" data-country="USA"
+          d="M 150,420 L 250,415 L 350,420 L 450,425 L 550,430 L 650,435 L 750,440 L 850,445 L 920,455 L 950,480 L 960,530 L 950,580 L 920,620 L 850,640 L 750,650 L 650,655 L 550,655 L 450,650 L 350,645 L 250,635 L 180,610 L 150,570 L 145,520 L 148,470 Z"/>
+    <text x="555" y="545" class="country-label" font-size="22">United States</text>
+
+    <!-- Mexico -->
+    <path class="country-region" data-country="Mexico"
+          d="M 350,680 L 450,675 L 550,675 L 650,678 L 720,685 L 750,710 L 760,750 L 750,790 L 720,820 L 650,830 L 550,832 L 450,828 L 380,815 L 350,785 L 340,745 L 345,710 Z"/>
+    <text x="550" y="760" class="country-label" font-size="16">Mexico</text>
+
+    <!-- Central America (simplified) -->
+    <rect class="country-region" data-country="Guatemala" x="450" y="850" width="70" height="40" rx="3"/>
+    <text x="485" y="875" class="country-label">Guatemala</text>
+
+    <rect class="country-region" data-country="Belize" x="530" y="850" width="55" height="40" rx="3"/>
+    <text x="557" y="875" class="country-label">Belize</text>
+
+    <rect class="country-region" data-country="El Salvador" x="595" y="850" width="70" height="40" rx="3"/>
+    <text x="630" y="875" class="country-label">El Salvador</text>
+
+    <rect class="country-region" data-country="Honduras" x="675" y="850" width="65" height="40" rx="3"/>
+    <text x="707" y="875" class="country-label">Honduras</text>
+
+    <rect class="country-region" data-country="Nicaragua" x="450" y="900" width="70" height="40" rx="3"/>
+    <text x="485" y="925" class="country-label">Nicaragua</text>
+
+    <rect class="country-region" data-country="Costa Rica" x="530" y="900" width="70" height="40" rx="3"/>
+    <text x="565" y="925" class="country-label">Costa Rica</text>
+
+    <rect class="country-region" data-country="Panama" x="610" y="900" width="60" height="40" rx="3"/>
+    <text x="640" y="925" class="country-label">Panama</text>
+
+    <!-- Caribbean Islands (simplified grid) -->
+    <rect class="country-region" data-country="Cuba" x="750" y="720" width="80" height="35" rx="3"/>
+    <text x="790" y="742" class="country-label">Cuba</text>
+
+    <rect class="country-region" data-country="Jamaica" x="700" y="770" width="65" height="30" rx="3"/>
+    <text x="732" y="789" class="country-label">Jamaica</text>
+
+    <rect class="country-region" data-country="Haiti" x="780" y="770" width="50" height="30" rx="3"/>
+    <text x="805" y="789" class="country-label">Haiti</text>
+
+    <rect class="country-region" data-country="Dominican Republic" x="840" y="770" width="90" height="30" rx="3"/>
+    <text x="885" y="789" class="country-label">Dominican Rep.</text>
+
+    <rect class="country-region" data-country="Bahamas" x="840" y="680" width="70" height="30" rx="3"/>
+    <text x="875" y="699" class="country-label">Bahamas</text>
+
+    <rect class="country-region" data-country="Trinidad and Tobago" x="950" y="860" width="100" height="25" rx="3"/>
+    <text x="1000" y="877" class="country-label" font-size="11">Trinidad & Tobago</text>
+
+    <rect class="country-region" data-country="Barbados" x="980" y="830" width="65" height="25" rx="3"/>
+    <text x="1012" y="847" class="country-label">Barbados</text>
+
+    <rect class="country-region" data-country="Saint Lucia" x="970" y="800" width="70" height="25" rx="3"/>
+    <text x="1005" y="817" class="country-label">St. Lucia</text>
+
+    <rect class="country-region" data-country="Grenada" x="950" y="890" width="60" height="25" rx="3"/>
+    <text x="980" y="907" class="country-label">Grenada</text>
+
+    <rect class="country-region" data-country="Saint Vincent and the Grenadines" x="960" y="770" width="110" height="25" rx="3"/>
+    <text x="1015" y="787" class="country-label" font-size="10">St. Vincent</text>
+
+    <rect class="country-region" data-country="Antigua and Barbuda" x="950" y="740" width="100" height="25" rx="3"/>
+    <text x="1000" y="757" class="country-label" font-size="10">Antigua</text>
+
+    <rect class="country-region" data-country="Dominica" x="980" y="710" width="65" height="25" rx="3"/>
+    <text x="1012" y="727" class="country-label">Dominica</text>
+
+    <rect class="country-region" data-country="Saint Kitts and Nevis" x="950" y="680" width="95" height="25" rx="3"/>
+    <text x="997" y="697" class="country-label" font-size="10">St. Kitts</text>
+</g>
+
+<text x="600" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#333">North America</text>
+</svg>

@@ -1,0 +1,93 @@
+<!-- South America Interactive Map -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" style="max-width: 100%; height: auto;">
+<style>
+    .country-region {
+        fill: #FFF;
+        stroke: #333;
+        stroke-width: 2;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .country-region:hover {
+        stroke-width: 4;
+        filter: brightness(0.9);
+    }
+    .country-region[level="5"] { fill: #FF7E7E; }
+    .country-region[level="4"] { fill: #FFB57E; }
+    .country-region[level="3"] { fill: #FFE57E; }
+    .country-region[level="2"] { fill: #A8FFBE; }
+    .country-region[level="1"] { fill: #88AEFF; }
+    .country-region[level="0"][alt="true"] { fill: #d6beff; }
+    .country-label {
+        font-size: 14px;
+        fill: #333;
+        pointer-events: none;
+        text-anchor: middle;
+        font-weight: 500;
+    }
+</style>
+
+<!-- Background -->
+<rect width="900" height="1200" fill="#E0F0FF"/>
+
+<!-- Countries -->
+<g id="countries">
+    <!-- Colombia -->
+    <path class="country-region" data-country="Colombia"
+          d="M 200,150 L 350,140 L 420,155 L 450,190 L 455,240 L 440,290 L 400,320 L 340,335 L 280,340 L 230,330 L 200,300 L 185,250 L 190,200 Z"/>
+    <text x="325" y="245" class="country-label" font-size="16">Colombia</text>
+
+    <!-- Venezuela -->
+    <path class="country-region" data-country="Venezuela"
+          d="M 460,160 L 550,155 L 620,170 L 650,200 L 655,240 L 640,280 L 600,305 L 540,315 L 480,310 L 460,280 L 455,240 Z"/>
+    <text x="555" y="240" class="country-label" font-size="14">Venezuela</text>
+
+    <!-- Guyana -->
+    <rect class="country-region" data-country="Guyana" x="640" y="240" width="80" height="90" rx="5"/>
+    <text x="680" y="290" class="country-label">Guyana</text>
+
+    <!-- Suriname -->
+    <rect class="country-region" data-country="Suriname" x="730" y="240" width="70" height="90" rx="5"/>
+    <text x="765" y="290" class="country-label">Suriname</text>
+
+    <!-- Ecuador -->
+    <path class="country-region" data-country="Ecuador"
+          d="M 180,350 L 260,345 L 310,360 L 330,400 L 325,450 L 300,485 L 260,500 L 220,495 L 190,470 L 175,430 L 178,390 Z"/>
+    <text x="255" y="425" class="country-label">Ecuador</text>
+
+    <!-- Peru -->
+    <path class="country-region" data-country="Peru"
+          d="M 180,510 L 260,505 L 330,515 L 380,540 L 410,590 L 425,660 L 420,730 L 400,790 L 360,820 L 300,835 L 250,830 L 210,800 L 185,750 L 175,690 L 180,630 L 185,570 Z"/>
+    <text x="300" y="680" class="country-label" font-size="18">Peru</text>
+
+    <!-- Brazil (large, center-right) -->
+    <path class="country-region" data-country="Brazil"
+          d="M 350,350 L 450,345 L 550,350 L 640,365 L 710,390 L 750,430 L 770,490 L 775,570 L 770,650 L 755,730 L 730,800 L 690,860 L 640,900 L 580,925 L 510,935 L 440,930 L 380,910 L 340,875 L 310,830 L 295,780 L 290,720 L 295,660 L 305,600 L 320,540 L 340,480 L 355,420 L 350,370 Z"/>
+    <text x="530" y="640" class="country-label" font-size="24">Brazil</text>
+
+    <!-- Bolivia -->
+    <path class="country-region" data-country="Bolivia"
+          d="M 280,850 L 360,840 L 430,850 L 470,880 L 485,930 L 480,980 L 460,1020 L 420,1045 L 370,1050 L 320,1040 L 285,1015 L 270,975 L 275,925 Z"/>
+    <text x="380" y="950" class="country-label">Bolivia</text>
+
+    <!-- Paraguay -->
+    <rect class="country-region" data-country="Paraguay" x="430" y="950" width="110" height="120" rx="5"/>
+    <text x="485" y="1015" class="country-label" font-size="16">Paraguay</text>
+
+    <!-- Chile (long, narrow, left side) -->
+    <path class="country-region" data-country="Chile"
+          d="M 150,850 L 220,845 L 250,865 L 260,910 L 265,970 L 265,1030 L 260,1090 L 250,1140 L 230,1170 L 200,1185 L 170,1180 L 145,1160 L 130,1120 L 125,1070 L 125,1010 L 130,950 L 140,900 Z"/>
+    <text x="195" y="1020" class="country-label" font-size="16">Chile</text>
+
+    <!-- Argentina (large, bottom-left) -->
+    <path class="country-region" data-country="Argentina"
+          d="M 270,910 L 340,905 L 410,915 L 460,940 L 485,980 L 495,1030 L 495,1090 L 485,1150 L 465,1190 L 430,1220 L 380,1240 L 320,1245 L 270,1235 L 240,1210 L 220,1175 L 210,1130 L 210,1080 L 215,1030 L 230,980 L 250,940 Z"/>
+    <text x="355" y="1090" class="country-label" font-size="20">Argentina</text>
+
+    <!-- Uruguay -->
+    <rect class="country-region" data-country="Uruguay" x="480" y="1080" width="90" height="80" rx="5"/>
+    <text x="525" y="1125" class="country-label">Uruguay</text>
+</g>
+
+<text x="450" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#333">South America</text>
+</svg>

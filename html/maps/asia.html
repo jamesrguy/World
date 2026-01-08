@@ -1,0 +1,193 @@
+<!-- Asia Interactive Map -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" style="max-width: 100%; height: auto;">
+<style>
+    .country-region {
+        fill: #FFF;
+        stroke: #333;
+        stroke-width: 2;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .country-region:hover {
+        stroke-width: 4;
+        filter: brightness(0.9);
+    }
+    .country-region[level="5"] { fill: #FF7E7E; }
+    .country-region[level="4"] { fill: #FFB57E; }
+    .country-region[level="3"] { fill: #FFE57E; }
+    .country-region[level="2"] { fill: #A8FFBE; }
+    .country-region[level="1"] { fill: #88AEFF; }
+    .country-region[level="0"][alt="true"] { fill: #d6beff; }
+    .country-label {
+        font-size: 11px;
+        fill: #333;
+        pointer-events: none;
+        text-anchor: middle;
+        font-weight: 500;
+    }
+</style>
+
+<!-- Background -->
+<rect width="1400" height="1000" fill="#E0F0FF"/>
+
+<!-- Countries -->
+<g id="countries">
+    <!-- Russia (large, spans top) -->
+    <rect class="country-region" data-country="Russia" x="200" y="80" width="1100" height="200" rx="8"/>
+    <text x="750" y="185" class="country-label" font-size="22">Russia</text>
+
+    <!-- Central Asia -->
+    <rect class="country-region" data-country="Kazakhstan" x="200" y="290" width="280" height="120" rx="5"/>
+    <text x="340" y="355" class="country-label" font-size="14">Kazakhstan</text>
+
+    <rect class="country-region" data-country="Uzbekistan" x="200" y="420" width="130" height="90" rx="4"/>
+    <text x="265" y="470" class="country-label" font-size="11">Uzbekistan</text>
+
+    <rect class="country-region" data-country="Turkmenistan" x="145" y="480" width="140" height="85" rx="4"/>
+    <text x="215" y="527" class="country-label" font-size="11">Turkmenistan</text>
+
+    <rect class="country-region" data-country="Kyrgyzstan" x="340" y="420" width="100" height="80" rx="4"/>
+    <text x="390" y="465" class="country-label" font-size="10">Kyrgyzstan</text>
+
+    <rect class="country-region" data-country="Tajikistan" x="290" y="510" width="110" height="75" rx="4"/>
+    <text x="345" y="552" class="country-label" font-size="10">Tajikistan</text>
+
+    <!-- Middle East -->
+    <rect class="country-region" data-country="Turkey" x="50" y="430" width="135" height="80" rx="4"/>
+    <text x="117" y="475" class="country-label" font-size="12">Turkey</text>
+
+    <rect class="country-region" data-country="Georgia" x="125" y="400" width="80" height="45" rx="4"/>
+    <text x="165" y="427" class="country-label" font-size="10">Georgia</text>
+
+    <rect class="country-region" data-country="Armenia" x="125" y="450" width="60" height="40" rx="4"/>
+    <text x="155" y="474" class="country-label" font-size="9">Armenia</text>
+
+    <rect class="country-region" data-country="Azerbaijan" x="145" y="420" width="85" height="50" rx="4"/>
+    <text x="187" y="450" class="country-label" font-size="10">Azerbaijan</text>
+
+    <rect class="country-region" data-country="Iran" x="145" y="570" width="180" height="120" rx="5"/>
+    <text x="235" y="635" class="country-label" font-size="13">Iran</text>
+
+    <rect class="country-region" data-country="Afghanistan" x="285" y="595" width="145" height="115" rx="4"/>
+    <text x="357" y="657" class="country-label" font-size="12">Afghanistan</text>
+
+    <rect class="country-region" data-country="Iraq" x="70" y="520" width="100" height="95" rx="4"/>
+    <text x="120" y="572" class="country-label" font-size="11">Iraq</text>
+
+    <rect class="country-region" data-country="Syria" x="50" y="515" width="85" height="70" rx="4"/>
+    <text x="92" y="555" class="country-label" font-size="10">Syria</text>
+
+    <rect class="country-region" data-country="Lebanon" x="50" y="590" width="55" height="40" rx="4"/>
+    <text x="77" y="614" class="country-label" font-size="9">Lebanon</text>
+
+    <rect class="country-region" data-country="Jordan" x="50" y="635" width="75" height="60" rx="4"/>
+    <text x="87" y="670" class="country-label" font-size="10">Jordan</text>
+
+    <rect class="country-region" data-country="Israel" x="50" y="700" width="60" height="50" rx="4"/>
+    <text x="80" y="730" class="country-label" font-size="9">Israel</text>
+
+    <rect class="country-region" data-country="Palestine" x="55" y="710" width="50" height="35" rx="4"/>
+    <text x="80" y="732" class="country-label" font-size="8">Palestine</text>
+
+    <rect class="country-region" data-country="Saudi Arabia" x="70" y="620" width="175" height="160" rx="5"/>
+    <text x="157" y="705" class="country-label" font-size="14">Saudi Arabia</text>
+
+    <rect class="country-region" data-country="Yemen" x="145" y="785" width="110" height="90" rx="4"/>
+    <text x="200" y="835" class="country-label" font-size="11">Yemen</text>
+
+    <rect class="country-region" data-country="Oman" x="200" y="700" width="110" height="140" rx="4"/>
+    <text x="255" y="775" class="country-label" font-size="11">Oman</text>
+
+    <rect class="country-region" data-country="UAE" x="185" y="755" width="100" height="50" rx="4"/>
+    <text x="235" y="785" class="country-label" font-size="10">UAE</text>
+
+    <rect class="country-region" data-country="Qatar" x="175" y="725" width="55" height="40" rx="4"/>
+    <text x="202" y="750" class="country-label" font-size="9">Qatar</text>
+
+    <rect class="country-region" data-country="Bahrain" x="160" y="710" width="45" height="30" rx="4"/>
+    <text x="182" y="730" class="country-label" font-size="8">Bahrain</text>
+
+    <rect class="country-region" data-country="Kuwait" x="140" y="640" width="65" height="45" rx="4"/>
+    <text x="172" y="667" class="country-label" font-size="9">Kuwait</text>
+
+    <!-- South Asia -->
+    <rect class="country-region" data-country="Pakistan" x="330" y="615" width="120" height="145" rx="5"/>
+    <text x="390" y="692" class="country-label" font-size="12">Pakistan</text>
+
+    <rect class="country-region" data-country="India" x="395" y="650" width="200" height="210" rx="6"/>
+    <text x="495" y="760" class="country-label" font-size="16">India</text>
+
+    <rect class="country-region" data-country="Nepal" x="460" y="625" width="90" height="55" rx="4"/>
+    <text x="505" y="657" class="country-label" font-size="10">Nepal</text>
+
+    <rect class="country-region" data-country="Bhutan" x="555" y="625" width="75" height="50" rx="4"/>
+    <text x="592" y="655" class="country-label" font-size="9">Bhutan</text>
+
+    <rect class="country-region" data-country="Bangladesh" x="550" y="680" width="100" height="90" rx="4"/>
+    <text x="600" y="730" class="country-label" font-size="11">Bangladesh</text>
+
+    <rect class="country-region" data-country="Sri Lanka" x="495" y="870" width="70" height="85" rx="4"/>
+    <text x="530" y="917" class="country-label" font-size="10">Sri Lanka</text>
+
+    <rect class="country-region" data-country="Maldives" x="425" y="910" width="75" height="40" rx="4"/>
+    <text x="462" y="935" class="country-label" font-size="9">Maldives</text>
+
+    <!-- East Asia -->
+    <rect class="country-region" data-country="Mongolia" x="550" y="290" width="230" height="120" rx="5"/>
+    <text x="665" y="355" class="country-label" font-size="14">Mongolia</text>
+
+    <rect class="country-region" data-country="China" x="490" y="420" width="350" height="280" rx="6"/>
+    <text x="665" y="565" class="country-label" font-size="20">China</text>
+
+    <rect class="country-region" data-country="North Korea" x="820" y="440" width="85" height="90" rx="4"/>
+    <text x="862" y="490" class="country-label" font-size="10">N. Korea</text>
+
+    <rect class="country-region" data-country="South Korea" x="820" y="535" width="85" height="85" rx="4"/>
+    <text x="862" y="582" class="country-label" font-size="10">S. Korea</text>
+
+    <rect class="country-region" data-country="Japan" x="920" y="420" width="100" height="270" rx="5"/>
+    <text x="970" y="560" class="country-label" font-size="14">Japan</text>
+
+    <rect class="country-region" data-country="Taiwan" x="840" y="635" width="75" height="65" rx="4"/>
+    <text x="877" y="672" class="country-label" font-size="10">Taiwan</text>
+
+    <rect class="country-region" data-country="Hong Kong" x="795" y="685" width="60" height="35" rx="4"/>
+    <text x="825" y="707" class="country-label" font-size="9">Hong Kong</text>
+
+    <!-- Southeast Asia -->
+    <rect class="country-region" data-country="Myanmar" x="640" y="710" width="100" height="140" rx="4"/>
+    <text x="690" y="785" class="country-label" font-size="11">Myanmar</text>
+
+    <rect class="country-region" data-country="Thailand" x="700" y="755" width="95" height="155" rx="4"/>
+    <text x="747" y="837" class="country-label" font-size="12">Thailand</text>
+
+    <rect class="country-region" data-country="Laos" x="745" y="735" width="85" height="105" rx="4"/>
+    <text x="787" y="792" class="country-label" font-size="10">Laos</text>
+
+    <rect class="country-region" data-country="Vietnam" x="800" y="730" width="100" height="210" rx="4"/>
+    <text x="850" y="840" class="country-label" font-size="12">Vietnam</text>
+
+    <rect class="country-region" data-country="Cambodia" x="795" y="845" width="90" height="80" rx="4"/>
+    <text x="840" y="890" class="country-label" font-size="10">Cambodia</text>
+
+    <rect class="country-region" data-country="Malaysia" x="710" y="915" width="145" height="70" rx="4"/>
+    <text x="782" y="955" class="country-label" font-size="12">Malaysia</text>
+
+    <rect class="country-region" data-country="Singapore" x="785" y="925" width="65" height="30" rx="4"/>
+    <text x="817" y="945" class="country-label" font-size="9">Singapore</text>
+
+    <rect class="country-region" data-country="Brunei" x="885" y="900" width="65" height="35" rx="4"/>
+    <text x="917" y="922" class="country-label" font-size="9">Brunei</text>
+
+    <rect class="country-region" data-country="Indonesia" x="905" y="770" width="280" height="150" rx="5"/>
+    <text x="1045" y="850" class="country-label" font-size="15">Indonesia</text>
+
+    <rect class="country-region" data-country="Timor-Leste" x="1195" y="885" width="90" height="50" rx="4"/>
+    <text x="1240" y="915" class="country-label" font-size="9">Timor-Leste</text>
+
+    <rect class="country-region" data-country="Philippines" x="1030" y="715" width="120" height="200" rx="5"/>
+    <text x="1090" y="820" class="country-label" font-size="13">Philippines</text>
+</g>
+
+<text x="700" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#333">Asia</text>
+</svg>
