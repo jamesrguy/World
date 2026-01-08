@@ -1,33 +1,9 @@
 {
-  "version": 2,
-  "name": "world-map-levels",
-  "builds": [
-    {
-      "src": "html/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/html/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/html/index.html"
-    }
-  ],
+  "buildCommand": null,
+  "outputDirectory": "html",
   "headers": [
     {
-      "source": "/html/(.*)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -45,14 +21,5 @@
       ]
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "regions": ["iad1"],
-  "github": {
-    "enabled": true,
-    "autoAlias": true,
-    "autoJobCancelation": true,
-    "silent": false
-  }
+  "regions": ["iad1"]
 }
