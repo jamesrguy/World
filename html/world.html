@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-loading>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="webtitle">World Map Levels - Score: 0</title>
+    <meta name="description" content="Interactive world map game - Mark countries you've visited across all continents">
+    <link rel="stylesheet" href="document.css?v=10">
+    <style>
+        /* World-specific styles */
+        #continent-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 900px;
+        }
+
+        .continent-card {
+            flex: 1 1 200px;
+            min-width: 200px;
+            padding: 20px;
+            background: #fff;
+            border: 3px solid #333;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .continent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .continent-card.completed {
+            background: #FFE57E;
+            border-color: #FFB000;
+        }
+
+        .continent-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .continent-card .progress {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .continent-card .score {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        #world-view {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #world-view.active {
+            display: block;
+        }
+
+        #continent-view {
+            display: none;
+        }
+
+        #continent-view.active {
+            display: block;
+        }
+
+        #achievements {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #333;
+            max-width: 250px;
+            z-index: 1000;
+        }
+
+        #achievements h4 {
+            margin: 0 0 10px 0;
+        }
+
+        .achievement {
+            padding: 5px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .achievement.unlocked {
+            background: #FFE57E;
+        }
+
+        .achievement.locked {
+            opacity: 0.5;
+        }
+
+        #stats-bar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 8px;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #88AEFF;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            border: 2px solid #333;
+        }
+
+        .back-button:hover {
+            background: #6688DD;
+        }
+
+        @media (max-width: 768px) {
+            #achievements {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px auto;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Main Container -->
+<div id="app">
+
+<!-- Stats Bar -->
+<div id="stats-bar">
+    <div class="stat-item">
+        <div class="stat-value">{{ totalScore }}</div>
+        <div class="stat-label">Total Score</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-value">{{ countriesVisited }}</div>
+        <div class="stat-label">Countries Visited</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-value">{{ continentsCompleted }}/7</div>
+        <div class="stat-label">Continents</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-value">{{ completionPercent }}%</div>
+        <div class="stat-label">Completion</div>
+    </div>
+</div>
+
+<!-- Achievements Panel -->
+<div id="achievements">
+    <h4>🏆 Achievements</h4>
+    <div v-for="achievement in achievements" :key="achievement.id" :class="['achievement', achievement.unlocked ? 'unlocked' : 'locked']">
+        <span>{{ achievement.icon }} {{ achievement.name }}</span>
+    </div>
+</div>
+
+<!-- Continent Selector (Initial View) -->
+<div id="continent-selector" v-if="currentView === 'selector'">
+    <div v-for="continent in continents"
+         :key="continent.id"
+         :class="['continent-card', continent.completed ? 'completed' : '']"
+         @click="selectContinent(continent.id)">
+        <h3>{{ continent.icon }} {{ continent.name }}</h3>
+        <div class="progress">{{ continent.countriesMarked }}/{{ continent.totalCountries }} countries</div>
+        <div class="score">{{ continent.score }} pts</div>
+    </div>
+
+    <div class="continent-card" @click="viewWorldMap" style="background: #A8FFBE; min-width: 100%;">
+        <h3>🌍 View Complete World Map</h3>
+        <div class="progress">See all your progress at once</div>
+    </div>
+</div>
+
+<!-- World Map View (After completing continents or manual view) -->
+<div id="world-view" :class="{ active: currentView === 'world' }">
+    <a class="back-button" @click="backToSelector">← Back to Continents</a>
+    <h2>🌍 Your World Map</h2>
+    <p>Total Score: {{ totalScore }} points | Countries: {{ countriesVisited }}/195</p>
+
+    <svg version="1.1" viewBox="0 0 1600 800" style="max-width: 100%; height: auto;">
+        <rect width="1600" height="800" fill="#E0F0FF"/>
+        <text x="800" y="400" text-anchor="middle" font-size="48" fill="#666">
+            World map visualization coming soon
+        </text>
+        <text x="800" y="450" text-anchor="middle" font-size="24" fill="#999">
+            For now, explore individual continents
+        </text>
+    </svg>
+</div>
+
+<!-- Continent View (Individual continent map) -->
+<div id="continent-view" :class="{ active: currentView === 'continent' }">
+    <a class="back-button" @click="backToSelector">← Back to Continents</a>
+    <div id="continent-content">
+        <!-- Continent-specific content loaded dynamically -->
+    </div>
+</div>
+
+</div>
+
+<!-- Language Selector -->
+<div id="选择语言" style="display: none;">
+    <a lang="English">English</a>
+    <a lang="简体中文">简体中文</a>
+    <a lang="繁體中文">繁體中文</a>
+    <a lang="日本語">日本語</a>
+    <a lang="French">Français</a>
+    <a lang="Español">Español</a>
+    <a lang="Danish">Dansk</a>
+    <a lang="עברית">עברית</a>
+</div>
+
+<!-- Footer Controls -->
+<footer>
+    <a id="Reset" class="按钮">Reset All</a>
+    <a id="Export" class="按钮">Export JSON</a>
+    <a id="Import" class="按钮">Import JSON</a>
+    <a href="leaderboard.html" target="_blank">🏆 Leaderboard</a>
+    <a href="https://github.com/tenpages/us-level" target="_blank">GitHub</a>
+    <a id="Lang" class="按钮">English</a>
+    <a id="保存" class="按钮">Save Image</a>
+</footer>
+
+<!-- Image Output Modal -->
+<div id="输出图像" style="display: none;">
+    <div>
+        <img>
+    </div>
+    <p>
+        <b>Press and hold</b> to save on mobile devices
+    </p>
+    <div>
+        <a class="按钮">Close</a>
+    </div>
+</div>
+
+<!-- Hidden file input for import -->
+<input type="file" id="importFile" accept=".json" style="display: none;">
+
+<!-- Scripts -->
+<script src="https://unpkg.com/vue@3.2.41/dist/vue.global.prod.js"></script>
+<script src="https://unpkg.com/vue-i18n@9.2.2/dist/vue-i18n.global.prod.js"></script>
+<script src="world.js?v=10"></script>
+
+</body>
+</html>
