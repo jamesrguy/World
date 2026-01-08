@@ -1,12 +1,6 @@
 {
-  "version": 2,
-  "name": "world-map-levels",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/html/$1"
-    }
-  ],
+  "buildCommand": null,
+  "outputDirectory": "html",
   "headers": [
     {
       "source": "/(.*)",
@@ -27,14 +21,5 @@
       ]
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "regions": ["iad1"],
-  "github": {
-    "enabled": true,
-    "autoAlias": true,
-    "autoJobCancelation": true,
-    "silent": false
-  }
+  "regions": ["iad1"]
 }
