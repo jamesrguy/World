@@ -1,23 +1,40 @@
 {
-  "name": "china-ex",
-  "version": "0.0.2",
-  "description": "us-level",
-  "main": "html/us.html",
+  "name": "world-map-levels",
+  "version": "2.0.0",
+  "description": "Interactive world map game with continent progression and global leaderboard",
+  "main": "html/index.html",
   "scripts": {
-    "generate-font": "node generate-font-slice.js "
+    "generate-font": "node generate-font-slice.js",
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel"
   },
   "keywords": [
-    "china"
+    "world-map",
+    "geography",
+    "travel",
+    "game",
+    "interactive-map",
+    "continents",
+    "countries",
+    "leaderboard"
   ],
-  "author": "itorr",
+  "author": "tenpages",
   "license": "MIT",
   "files": [
-    "html/us.html",
-    "html/document.css",
-    "html/us.js",
-    "html/slice.woff"
+    "html/**/*",
+    "api/**/*",
+    "vercel.json",
+    "Claude.md"
   ],
   "dependencies": {
     "axios": "^0.21.4"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
