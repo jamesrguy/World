@@ -48,7 +48,7 @@
   "env": {
     "NODE_ENV": "production"
   },
-  "regions": ["iad1", "sfo1", "lhr1", "hnd1", "syd1"],
+  "regions": ["iad1"],
   "github": {
     "enabled": true,
     "autoAlias": true,

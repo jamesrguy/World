@@ -130,9 +130,12 @@ vercel --prod
 
 ### Key Features:
 - **Automatic HTTPS**: Free SSL certificates
-- **Global CDN**: Fast loading worldwide
+- **Global CDN**: Fast loading worldwide (even with single region on free tier)
 - **Serverless Functions**: High-scores API scales automatically
 - **Automatic Deployments**: Push to GitHub → auto-deploy
+- **Single Region Deployment**: Configured for `iad1` (Washington DC) to comply with Vercel free tier limits
+
+> **Note**: The free tier supports deployment to one region. The app uses `iad1` (US East) for optimal performance. Vercel's Edge Network still provides global CDN caching for fast loading worldwide.
 
 ## Custom Domain (Optional)
 
