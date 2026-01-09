@@ -1,0 +1,86 @@
+<!-- Oceania Interactive Map -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" style="max-width: 100%; height: auto;">
+<style>
+    .country-region {
+        fill: #FFF;
+        stroke: #333;
+        stroke-width: 2;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .country-region:hover {
+        stroke-width: 4;
+        filter: brightness(0.9);
+    }
+    .country-region[level="5"] { fill: #FF7E7E; }
+    .country-region[level="4"] { fill: #FFB57E; }
+    .country-region[level="3"] { fill: #FFE57E; }
+    .country-region[level="2"] { fill: #A8FFBE; }
+    .country-region[level="1"] { fill: #88AEFF; }
+    .country-region[level="0"][alt="true"] { fill: #d6beff; }
+    .country-label {
+        font-size: 14px;
+        fill: #333;
+        pointer-events: none;
+        text-anchor: middle;
+        font-weight: 500;
+    }
+</style>
+
+<!-- Background -->
+<rect width="1200" height="900" fill="#E0F0FF"/>
+
+<!-- Countries -->
+<g id="countries">
+    <!-- Australia (large, center-left) -->
+    <path class="country-region" data-country="Australia"
+          d="M 150,300 L 300,280 L 450,270 L 600,275 L 700,295 L 750,340 L 780,400 L 785,470 L 775,540 L 745,600 L 690,650 L 620,680 L 530,695 L 430,700 L 330,690 L 240,665 L 170,620 L 130,560 L 115,490 L 120,420 L 135,360 Z"/>
+    <text x="450" y="490" class="country-label" font-size="28">Australia</text>
+
+    <!-- New Zealand -->
+    <path class="country-region" data-country="New Zealand"
+          d="M 950,550 L 1000,540 L 1040,555 L 1060,590 L 1065,640 L 1055,690 L 1025,730 L 980,750 L 930,745 L 900,720 L 885,680 L 890,630 L 910,585 Z"/>
+    <text x="975" y="650" class="country-label" font-size="16">New Zealand</text>
+
+    <!-- Papua New Guinea -->
+    <path class="country-region" data-country="Papua New Guinea"
+          d="M 650,180 L 750,175 L 830,185 L 880,210 L 900,250 L 890,290 L 850,315 L 780,325 L 710,320 L 660,300 L 640,260 L 645,220 Z"/>
+    <text x="770" y="255" class="country-label" font-size="14">Papua New Guinea</text>
+
+    <!-- Pacific Island Nations (simplified) -->
+    <rect class="country-region" data-country="Fiji" x="1000" y="350" width="80" height="60" rx="5"/>
+    <text x="1040" y="385" class="country-label" font-size="13">Fiji</text>
+
+    <rect class="country-region" data-country="Solomon Islands" x="920" y="250" width="110" height="60" rx="5"/>
+    <text x="975" y="285" class="country-label" font-size="12">Solomon Islands</text>
+
+    <rect class="country-region" data-country="Vanuatu" x="950" y="320" width="85" height="55" rx="5"/>
+    <text x="992" y="352" class="country-label" font-size="11">Vanuatu</text>
+
+    <rect class="country-region" data-country="Samoa" x="1090" y="320" width="70" height="50" rx="5"/>
+    <text x="1125" y="350" class="country-label" font-size="11">Samoa</text>
+
+    <rect class="country-region" data-country="Tonga" x="1040" y="420" width="70" height="50" rx="5"/>
+    <text x="1075" y="450" class="country-label" font-size="11">Tonga</text>
+
+    <rect class="country-region" data-country="Micronesia" x="900" y="150" width="100" height="50" rx="5"/>
+    <text x="950" y="180" class="country-label" font-size="11">Micronesia</text>
+
+    <rect class="country-region" data-country="Palau" x="700" y="180" width="75" height="45" rx="5"/>
+    <text x="737" y="207" class="country-label" font-size="11">Palau</text>
+
+    <rect class="country-region" data-country="Marshall Islands" x="1010" y="150" width="110" height="50" rx="5"/>
+    <text x="1065" y="180" class="country-label" font-size="10">Marshall Islands</text>
+
+    <rect class="country-region" data-country="Kiribati" x="1075" y="230" width="85" height="50" rx="5"/>
+    <text x="1117" y="260" class="country-label" font-size="11">Kiribati</text>
+
+    <rect class="country-region" data-country="Nauru" x="1010" y="220" width="60" height="40" rx="5"/>
+    <text x="1040" y="245" class="country-label" font-size="10">Nauru</text>
+
+    <rect class="country-region" data-country="Tuvalu" x="1090" y="270" width="65" height="40" rx="5"/>
+    <text x="1122" y="295" class="country-label" font-size="10">Tuvalu</text>
+</g>
+
+<text x="600" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#333">Oceania</text>
+</svg>

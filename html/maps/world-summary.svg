@@ -1,0 +1,115 @@
+<!-- World Map SVG - Simplified clickable world view -->
+<svg id="world-map-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1000" style="max-width: 100%; height: auto;">
+<style>
+    #world-continents path,
+    #world-continents rect {
+        fill: #E8E8E8;
+        stroke: #333;
+        stroke-width: 2;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    #world-continents path:hover,
+    #world-continents rect:hover {
+        fill: #FFE57E;
+        stroke-width: 3;
+    }
+    #world-continents path[data-visited="true"],
+    #world-continents rect[data-visited="true"] {
+        fill: #88AEFF;
+    }
+    #world-continents path[data-completed="true"],
+    #world-continents rect[data-completed="true"] {
+        fill: #A8FFBE;
+    }
+    .continent-label {
+        font-size: 24px;
+        font-weight: bold;
+        fill: #333;
+        pointer-events: none;
+        text-anchor: middle;
+    }
+    .country-region {
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+    }
+    .country-region[level="5"] { fill: #FF7E7E; }
+    .country-region[level="4"] { fill: #FFB57E; }
+    .country-region[level="3"] { fill: #FFE57E; }
+    .country-region[level="2"] { fill: #A8FFBE; }
+    .country-region[level="1"] { fill: #88AEFF; }
+    .country-region[level="0"][alt="true"] { fill: #d6beff; }
+</style>
+
+<!-- Background -->
+<rect width="2000" height="1000" fill="#E0F0FF"/>
+
+<!-- Continents Group -->
+<g id="world-continents">
+
+    <!-- North America -->
+    <path id="continent-north-america"
+          data-continent="north-america"
+          d="M 180,150 L 200,120 L 250,110 L 320,100 L 380,95 L 450,100 L 500,120 L 530,150 L 550,200 L 560,280 L 550,350 L 530,420 L 500,460 L 450,480 L 380,490 L 320,485 L 280,470 L 250,440 L 220,380 L 200,320 L 185,250 L 180,180 Z"/>
+    <text x="365" y="280" class="continent-label">North America</text>
+
+    <!-- South America -->
+    <path id="continent-south-america"
+          data-continent="south-america"
+          d="M 420,520 L 450,510 L 480,520 L 500,550 L 510,600 L 515,670 L 510,740 L 495,800 L 470,850 L 440,880 L 410,890 L 380,885 L 360,860 L 350,820 L 345,760 L 350,690 L 360,620 L 380,560 L 400,530 Z"/>
+    <text x="430" y="700" class="continent-label">South America</text>
+
+    <!-- Europe -->
+    <path id="continent-europe"
+          data-continent="europe"
+          d="M 900,180 L 940,170 L 1000,165 L 1050,170 L 1090,185 L 1110,210 L 1120,250 L 1115,290 L 1095,320 L 1060,340 L 1010,350 L 960,345 L 920,330 L 890,305 L 875,270 L 880,230 L 890,200 Z"/>
+    <text x="1000" y="260" class="continent-label">Europe</text>
+
+    <!-- Africa -->
+    <path id="continent-africa"
+          data-continent="africa"
+          d="M 920,380 L 960,370 L 1010,370 L 1060,380 L 1100,400 L 1130,440 L 1145,500 L 1150,570 L 1145,640 L 1130,710 L 1100,760 L 1060,800 L 1010,820 L 960,825 L 920,815 L 890,785 L 870,740 L 860,680 L 865,610 L 880,540 L 900,470 L 910,420 Z"/>
+    <text x="1000" y="600" class="continent-label">Africa</text>
+
+    <!-- Asia -->
+    <path id="continent-asia"
+          data-continent="asia"
+          d="M 1150,120 L 1250,110 L 1350,105 L 1450,110 L 1550,125 L 1630,150 L 1690,190 L 1720,240 L 1735,300 L 1730,360 L 1700,410 L 1650,450 L 1580,475 L 1500,485 L 1420,480 L 1350,465 L 1290,440 L 1240,405 L 1200,360 L 1175,310 L 1165,250 L 1160,190 Z"/>
+    <text x="1450" y="300" class="continent-label">Asia</text>
+
+    <!-- Oceania -->
+    <path id="continent-oceania"
+          data-continent="oceania"
+          d="M 1500,650 L 1550,645 L 1610,650 L 1660,670 L 1690,705 L 1700,750 L 1690,800 L 1660,835 L 1610,855 L 1550,860 L 1500,850 L 1465,825 L 1445,790 L 1445,745 L 1460,700 L 1480,670 Z"/>
+    <text x="1575" y="755" class="continent-label">Oceania</text>
+
+    <!-- Antarctica -->
+    <rect id="continent-antarctica"
+          data-continent="antarctica"
+          x="300" y="920" width="1400" height="60" rx="10"/>
+    <text x="1000" y="960" class="continent-label">Antarctica</text>
+
+</g>
+
+<!-- Legend -->
+<g id="legend" transform="translate(50, 850)">
+    <rect width="300" height="140" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="150" y="25" text-anchor="middle" font-weight="bold" font-size="16">Level Colors</text>
+
+    <rect x="10" y="35" width="30" height="15" fill="#FF7E7E"/>
+    <text x="45" y="47" font-size="12">Lived Here (5pts)</text>
+
+    <rect x="10" y="55" width="30" height="15" fill="#FFB57E"/>
+    <text x="45" y="67" font-size="12">Stayed Here (4pts)</text>
+
+    <rect x="10" y="75" width="30" height="15" fill="#FFE57E"/>
+    <text x="45" y="87" font-size="12">Visited Here (3pts)</text>
+
+    <rect x="10" y="95" width="30" height="15" fill="#A8FFBE"/>
+    <text x="45" y="107" font-size="12">Stopped Here (2pts)</text>
+
+    <rect x="10" y="115" width="30" height="15" fill="#88AEFF"/>
+    <text x="45" y="127" font-size="12">Passed Here (1pt)</text>
+</g>
+
+</svg>
